@@ -50,6 +50,3 @@ See `docs/data_governance_policy.md` for defined roles, rules, and processes.
 
 ---
 
-## 📜 License
-
-MIT License
