@@ -98,7 +98,15 @@ else:
 # --- Section 3: All Workflow Requests Table ---
 st.markdown("---")
 st.subheader("📋 All Workflow Records")
-st.dataframe(workflow_df)
+
+# Convert datetime columns to strings before displaying
+workflow_display_df = workflow_df.copy()
+if "RequestDate" in workflow_display_df.columns:
+    workflow_display_df["RequestDate"] = workflow_display_df["RequestDate"].astype(str)
+if "ApprovalDate" in workflow_display_df.columns:
+    workflow_display_df["ApprovalDate"] = workflow_display_df["ApprovalDate"].astype(str)
+
+st.dataframe(workflow_display_df)
 
 # --- Section 4: Audit Log Viewer ---
 st.markdown("---")
@@ -113,5 +121,13 @@ else:
     if selected_mat:
         mat_history = audit_df[audit_df["MaterialNumber"] == selected_mat]
         mat_history = mat_history.sort_values("Version")
+
+        # Convert datetime columns to strings before displaying
+        mat_history_display = mat_history.copy()
+        if "CreatedAt" in mat_history_display.columns:
+            mat_history_display["CreatedAt"] = mat_history_display["CreatedAt"].astype(str)
+        if "ModifiedAt" in mat_history_display.columns:
+            mat_history_display["ModifiedAt"] = mat_history_display["ModifiedAt"].astype(str)
+
         st.write(f"Showing version history for **{selected_mat}**:")
-        st.dataframe(mat_history)
+        st.dataframe(mat_history_display)
