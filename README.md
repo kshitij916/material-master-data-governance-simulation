@@ -1,8 +1,3 @@
-Absolutely! Here's the **complete `README.md`** in proper Markdown formatting — with the `Getting Started` and all code blocks properly fenced:
-
----
-
-````markdown
 # 📦 Material Master Data Governance Simulation
 
 This project simulates an end-to-end **Material Master Data Management System** using the Online Retail dataset (UCI ML Repo). It models how enterprises manage material requests, approvals, audit trails, data governance policies, and quality KPIs — similar to SAP ERP workflows.
