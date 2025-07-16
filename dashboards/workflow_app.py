@@ -131,3 +131,36 @@ else:
 
         st.write(f"Showing version history for **{selected_mat}**:")
         st.dataframe(mat_history_display)
+
+# --- Section 5: Data Quality & Workflow KPIs ---
+st.markdown("---")
+st.subheader("📊 Data Quality & Workflow KPIs")
+
+# Calculate KPIs
+total_requests = len(workflow_df)
+total_approved = len(workflow_df[workflow_df["Status"] == "Approved"])
+approval_rate = (total_approved / total_requests * 100) if total_requests > 0 else 0
+
+# Approval time
+workflow_df["RequestDate"] = pd.to_datetime(workflow_df["RequestDate"], errors='coerce')
+workflow_df["ApprovalDate"] = pd.to_datetime(workflow_df["ApprovalDate"], errors='coerce')
+approved_df = workflow_df.dropna(subset=["ApprovalDate"])
+approval_times = (approved_df["ApprovalDate"] - approved_df["RequestDate"]).dt.days
+avg_approval_days = round(approval_times.mean(), 2) if not approval_times.empty else 0
+
+# Duplicate materials
+dup_count = workflow_df["MaterialNumber"].duplicated().sum()
+
+# Short or missing descriptions
+invalid_descriptions = workflow_df["MaterialDescription"].apply(lambda x: pd.isna(x) or len(str(x)) < 5).sum()
+
+# Show KPIs
+col1, col2, col3 = st.columns(3)
+col1.metric("📦 Total Requests", total_requests)
+col2.metric("✅ Approved", total_approved)
+col3.metric("📈 Approval Rate", f"{approval_rate:.1f} %")
+
+col4, col5, col6 = st.columns(3)
+col4.metric("⏱️ Avg Approval Time (days)", avg_approval_days)
+col5.metric("🛑 Duplicate Material Numbers", dup_count)
+col6.metric("🧼 Short/Missing Descriptions", invalid_descriptions)
