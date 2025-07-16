@@ -122,21 +122,3 @@ Includes roles, validations, versioning rules, and approval flow documentation.
 
 ---
 
-## 📌 Roadmap Ideas
-
-* [ ] Add user roles and login simulation
-* [ ] SLA breach warnings (e.g. overdue requests)
-* [ ] Trigger email-like notifications
-* [ ] Extend to Customer/Vendor master domains
-* [ ] Enable multi-level approval (tiered workflow)
-
----
-
-## ✅ Ideal For
-
-* Practicing **SAP-style Master Data Governance**
-* Showcasing **data quality & workflow automation**
-* Building a portfolio project for **data architect** or **analyst** roles
-* Demonstrating real-world **KPI tracking** and **dashboarding**
-
----
